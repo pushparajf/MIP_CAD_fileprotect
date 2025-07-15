@@ -1,0 +1,7 @@
+Echo "Protect AutoCAD logs" | out-file C:\Aip_scripts\aip_logs.txt -append
+get-date | out-file C:\Aip_scripts\aip_logs.txt -append
+
+
+Get-ChildItem "C:\AutoCAD\*.*" -File -Recurse | Get-AIPFileStatus | where {$_.IsLabeled -eq $False} | Set-AIPFileLabel -LabelId <Label I> | out-file C:\Aip_scripts\aip_logs.txt -append
+
+Get-ChildItem "C:\AutoCAD\*.dwg.pfile" | Rename-Item -NewName { $_.Name -replace '.dwg.pfile','.dwg' }
